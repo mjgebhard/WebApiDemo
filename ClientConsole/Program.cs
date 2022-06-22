@@ -190,7 +190,7 @@ namespace ClientConsole
         public static async Task DeleteData(string id)
         {
             Console.WriteLine();
-            Console.WriteLine("****  Delte ****");
+            Console.WriteLine("****  Delete ****");
             Console.WriteLine();
             string rawJson = string.Empty;
 
