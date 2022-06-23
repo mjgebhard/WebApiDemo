@@ -11,11 +11,26 @@ namespace ClientConsole
     class Program
     {
         public static HttpClient client;
+
+        //IIS
+        //public static string baseAddress = "http://localhost";
+        //public static string action = "WebApiBasic/api/values";
+
+        //IIS Express
+        public static string baseAddress = "https://localhost:44328/";
+        public static string action = "api/values";
+
         static void Main(string[] args)
         {
+
+            //DateTime d = new DateTime();
+            //Console.WriteLine(d);
+            //return;
+
             //Configure HttpClient
+            //https://localhost:44328
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44328");
+            client.BaseAddress = new Uri(baseAddress);
 
             //Make an HTTP GET request
             List<ResponseOrder> data = GetData().GetAwaiter().GetResult();
@@ -56,7 +71,7 @@ namespace ClientConsole
             List<ResponseOrder> data = new List<ResponseOrder>();
             string rawJson = string.Empty;
 
-            HttpResponseMessage response = await client.GetAsync("api/values");
+            HttpResponseMessage response = await client.GetAsync($"{action}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -81,7 +96,7 @@ namespace ClientConsole
             ResponseOrder data = new ResponseOrder();
             string rawJson = string.Empty;
 
-            HttpResponseMessage response = await client.GetAsync($"api/values/{id}");
+            HttpResponseMessage response = await client.GetAsync($"{action}/{id}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -124,7 +139,7 @@ namespace ClientConsole
 
             string json = JsonConvert.SerializeObject(request);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("api/values", httpContent);
+            HttpResponseMessage response = await client.PostAsync($"{action}", httpContent);
 
             if (response.IsSuccessStatusCode)
             {
@@ -169,7 +184,7 @@ namespace ClientConsole
 
             string json = JsonConvert.SerializeObject(request);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync($"api/values/{id}", httpContent);
+            HttpResponseMessage response = await client.PutAsync($"{action}/{id}", httpContent);
 
             if (response.IsSuccessStatusCode)
             {
@@ -194,7 +209,7 @@ namespace ClientConsole
             Console.WriteLine();
             string rawJson = string.Empty;
 
-            HttpResponseMessage response = await client.DeleteAsync($"api/values/{id}");
+            HttpResponseMessage response = await client.DeleteAsync($"{action}/{id}");
 
             if (response.IsSuccessStatusCode)
             {
