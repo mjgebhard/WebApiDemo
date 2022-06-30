@@ -13,12 +13,12 @@ namespace ClientConsole
         public static HttpClient client;
 
         //IIS
-        //public static string baseAddress = "http://localhost";
-        //public static string action = "WebApiBasic/api/values";
+        public static string baseAddress = "http://localhost";
+        public static string action = "WebApiBasic/api/values";
 
         //IIS Express
-        public static string baseAddress = "https://localhost:44328/";
-        public static string action = "api/values";
+        //public static string baseAddress = "https://localhost:44328/";
+        //public static string action = "api/values";
 
         static void Main(string[] args)
         {
